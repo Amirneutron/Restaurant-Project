@@ -3,6 +3,8 @@ var router = express.Router();
 var Product = require('../models/product');
 var Admin = require('../models/admin');
 
+var ordersController = require('./orders');
+
 //Return a list of all the products on the panel
 router.get('/', function (req, res, next) {
   Product.find(function (err, product) {
@@ -62,6 +64,11 @@ router.delete('/:id', function (req, res, next) {
     res.json(product);
   });
 });
+
+router.use('/:id/orders', function (req, res, next) {
+  req.productId = req.params.id;
+  next();
+}, ordersController);
 
 
 module.exports = router;

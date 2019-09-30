@@ -5,6 +5,7 @@ var md5 = require('md5');
 var ordersController = require('./orders');
 
 var productsController = require('./products');
+var reviewsController = require('./reviews');
 
 // Create a new user
 router.post('/', function (req, res, next) {
@@ -106,7 +107,8 @@ router.get('/:id', function (req, res, next) {
   });
 });
 
-router.use('/:id/orders', function (req, res, next) {
+//nested request
+router.use('/:id/products/orders', function (req, res, next) {
   req.userId = req.params.id;
   next();
 }, ordersController);
@@ -115,6 +117,11 @@ router.use('/:id/products', function (req, res, next) {
   req.userId = req.params.id;
   next();
 }, productsController);
+
+router.use('/:id/reviews', function (req, res, next) {
+  req.userId = req.params.id;
+  next();
+}, reviewsController);
 
 module.exports = router;
 

@@ -9,6 +9,9 @@ var history = require('connect-history-api-fallback');
 var camelsController = require('./controllers/camels');
 var usersController = require('./controllers/users');
 var adminsController = require('./controllers/admins');
+var reviewsController = require('./controllers/reviews');
+var productsController = require('./controllers/products');
+var ordersController = require('./controllers/orders');
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/restaurantDataBase';
@@ -41,6 +44,9 @@ app.get('/api', function(req, res) {
 app.use('/api/camels', camelsController);
 app.use('/api/users', usersController);
 app.use('/api/admins', adminsController);
+app.use('/api/reviews', reviewsController);
+app.use('/api/products', productsController);
+app.use('/api/orders',ordersController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {

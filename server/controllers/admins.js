@@ -5,6 +5,8 @@ var User = require('../models/user');
 var Admin = require('../models/admin');
 
 var productsController = require('./products');
+var reviewsController = require('./reviews');
+var ordersController = require('./orders');
 
 // Create a new admin
 router.post('/', function (req, res, next) {
@@ -93,5 +95,15 @@ router.use('/:id/products', function (req, res, next) {
   req.adminId = req.params.id;
   next();
 }, productsController);
+
+router.use('/:id/reviews', function (req, res, next) {
+  req.adminId = req.params.id;
+  next();
+}, reviewsController);
+
+router.use('/:id/orders', function (req, res, next) {
+  req.adminId = req.params.id;
+  next();
+}, ordersController);
 
 module.exports = router;

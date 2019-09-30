@@ -1,11 +1,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var Product = require('./product');
 
 var orderSchema = new Schema({
-  userId: { type: Schema.Types.ObjectId, ref: 'users' },
-  products: { type: [Product.Schema] },
-  quantity: { type: Number }
+  orderedBy: { type: Schema.Types.ObjectId, ref: 'users' },
+  products: [{ type: Schema.Types.ObjectId,ref:'Products' }],
+  quantity: [{ type: Number }]
 });
 
 

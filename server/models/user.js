@@ -6,6 +6,7 @@ var userSchema = new Schema({
   lName: { type: String, required: true },
   email: { type: String, unique: true, required: true },
   mobileNumber: { type: Number, unique: true },
+  address: { type: String, required: true },
   password: { type: String, required: true }
 });
 

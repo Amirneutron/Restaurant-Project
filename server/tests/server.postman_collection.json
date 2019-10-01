@@ -1,82 +1,89 @@
 {
 	"info": {
-		"_postman_id": "f1f0dc69-72ef-44ee-9bda-dfac8a907469",
-		"name": "server",
+		"_postman_id": "7355c574-1228-4889-a530-3798ec1a265e",
+		"name": "server.postman_collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "GET /api",
+			"name": "Create a new user",
 			"event": [
 				{
-					"listen": "prerequest",
+					"listen": "test",
 					"script": {
-						"id": "c67a5d47-3a70-45b0-8001-b37eb933382f",
+						"id": "f44e0240-264e-4e83-b1e7-4350e642a618",
 						"exec": [
-							""
+							"let jsonData = pm.response.json();\r",
+							"let userId = jsonData._id;\r",
+							"pm.environment.set(\"user_id\", userId);\r",
+							"\r",
+							"let getUserId = pm.variables.get(\"user_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 201\", () => {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"/*pm.test(\"User has correct data\", () => {\r",
+							"    pm.expect(jsonData.fName).to.eql(\"Stanko\");\r",
+							"    pm.expect(jsonData.lName).to.eql(\"Deep\");\r",
+							"});*/"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
-						"key": "Accept",
+						"key": "Content-Type",
+						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fName\": \"Postman\",\n    \"lName\": \"Deep\",\n    \"email\": \"Gagandeep@user.com\",\n    \"mobileNumber\": 784578,\n    \"address\": \"21, Nordstan\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{host}}/api",
+					"raw": "{{host}}/api/users/",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"api"
+						"api",
+						"users",
+						""
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "POST /api/camels",
+			"name": "Create a new Admin",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "927025af-5584-4888-a286-730662635095",
+						"id": "593e14ff-6946-4699-b5c2-761eb87bacfa",
 						"exec": [
-							"// Save and read environment variables",
-							"",
-							"// 1) Create an environment in Postman:",
-							"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
-							"",
-							"// 2) Save reponse data in environment variable",
-							"var jsonData = pm.response.json();",
-							"var camelId = jsonData._id",
-							"pm.environment.set(\"camel_id\", camelId);",
-							"",
-							"// 3) Use variable in later requests via {{variable}}",
-							"// GET {{host}}/api/camels/{{camel_id}}",
-							"var getCamelId = pm.variables.get(\"camel_id\");",
-							"",
-							"// Test assertion examples",
-							"pm.test(\"Status code is 201\", function () {",
-							"    pm.response.to.have.status(201);",
-							"});",
-							"",
-							"pm.test(\"Body has correct color and position\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.color).to.eql(\"orange\");",
-							"    pm.expect(jsonData.position).to.eql(7);",
-							"});",
-							"",
-							"pm.test(\"Body has _id\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData._id).to.be.a('String');",
-							"});",
+							"let jsonData = pm.response.json();\r",
+							"let adminId = jsonData._id;\r",
+							"pm.environment.set(\"admin_id\", adminId);\r",
+							"\r",
+							"let getAdminId = pm.variables.get(\"admin_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 201\", () => {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
 							""
 						],
 						"type": "text/javascript"
@@ -87,147 +94,1025 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "Accept",
-						"type": "text",
-						"value": "application/json"
-					},
-					{
 						"key": "Content-Type",
+						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"color\": \"orange\",\n\t\"position\": 7\n}\n"
+					"raw": "{\n\t\"email\": \"Tester@admin.com\",\n\t\"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
-					"raw": "{{host}}/api/camels",
+					"raw": "{{host}}/api/admins",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"camels"
-					],
-					"query": [
-						{
-							"key": "",
-							"value": ""
-						}
+						"admins"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "GET /api/camels",
+			"name": "Make a review - User",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "927025af-5584-4888-a286-730662635095",
+						"id": "9ab27f5d-eede-4d64-b486-e9c534047b40",
 						"exec": [
-							""
+							"let jsonData = pm.response.json();\r",
+							"let reviewId = jsonData._id;\r",
+							"pm.environment.set(\"review_id\", reviewId);\r",
+							"\r",
+							"let getReviewId = pm.variables.get(\"review_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 201\", () => {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
-						"key": "Accept",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api/camels",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"camels"
-					],
-					"query": [
-						{
-							"key": "",
-							"value": ""
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET /api/camels/:id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "927025af-5584-4888-a286-730662635095",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
+						"key": "Content-Type",
+						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rating\": 6,\n    \"comment\": \"Very fast delivery\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{host}}/api/camels/{{camel_id}}",
+					"raw": "{{host}}/api/users/{{user_id}}/reviews",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"camels",
-						"{{camel_id}}"
+						"users",
+						"{{user_id}}",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a user with the given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7a9e9444-a72a-4542-96d3-80ae4ec0c5c3",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/users/{{user_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "31bd71df-8dcb-43ce-961d-51ca399ff5b2",
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"let productId = jsonData._id;\r",
+							"pm.environment.set(\"prod_id\", productId);\r",
+							"\r",
+							"let getProductId = pm.variables.get(\"prod_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 201\", () => {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"Amir Doritos\",\n    \"price\" : 89348,\n    \"image\" : \"Sushi.jpg\",\n    \"content\" : \"Sushi + 2 Cola drinks\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/admins/{{admin_id}}/products",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"admins",
+						"{{admin_id}}",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users - Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "29820b4b-f6a0-4fae-9238-93577282fe2a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/admins/users/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"admins",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Make an order -User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c083f99f-ef45-44ce-91d8-7a2d9f906bd2",
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"let orderId = jsonData._id;\r",
+							"pm.environment.set(\"order_id\", orderId);\r",
+							"\r",
+							"let getOrderId = pm.variables.get(\"order_id\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(201)});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/users/{{user_id}}/products/orders",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{user_id}}",
+						"products",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user info with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abc7c973-50f7-4eba-8f3b-5e91ccaa5d1f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lName\": \"Test 2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/users/{{user_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user password with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ff33c654-3d7d-4f9a-bcfb-ce32ffbcfe4f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/users/{{user_id}}/password",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{user_id}}",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login an existing admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea6d90f4-ad7a-48da-83f6-3f76a5185a86",
+						"exec": [
+							"var jsonData= pm.response.json();\r",
+							"    pm.test(\"Admin has correct data\", () => {\r",
+							"    pm.expect(jsonData.email).to.eql(\"Tester@admin.com\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"Tester@admin.com\",\n\t\"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/admins",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"admins"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update admin info with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "adced264-c785-4b54-8a5b-e21461beccea",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"password\": \"00000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/admins/{{admin_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"admins",
+						"{{admin_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login an existing user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "67f25cd3-1fd7-470c-bc95-cbc50c95aa68",
+						"exec": [
+							"var jsonData= pm.response.json();\r",
+							"    pm.test(\"User has correct data\", () => {\r",
+							"    pm.expect(jsonData.fName).to.eql(\"Postman\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"email\": \"Gagandeep@user.com\",\r\n\t\"password\": \"password\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/users",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all products - User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7f6dbbab-b5d7-4209-bb9c-678eb2744e89",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/users/{{user_id}}/products",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{user_id}}",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all products- Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d076d900-1c01-45ab-9622-54e55b66688b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/admins/{{admin_id}}/products/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"admins",
+						"{{admin_id}}",
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a list of all products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5e1268b6-ddd0-4912-b855-c9cfcd5c6b97",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/products",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all reviews",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7126a630-5ca0-4879-a3b3-78eac36e3966",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/reviews",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all orders - Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "17b0d9a8-df13-45f0-8a36-b5297a1f3729",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/admins/{{admin_id}}/orders/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"admins",
+						"{{admin_id}}",
+						"orders",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update or edit a review",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f3f2e0e-d027-4f41-a7ec-d40c31afd5d3",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comment\": \"The UI is easy to use\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/users/{{user_id}}/reviews/{{review_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{user_id}}",
+						"reviews",
+						"{{review_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a specific order - User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "14e2f285-fb27-4664-99ec-82830d754454",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(201)});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"quantity\": 4,\n\t\"products\": \"{{prod_id}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/users/{{user_id}}/products/orders/{{order_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{user_id}}",
+						"products",
+						"orders",
+						"{{order_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update product info with the given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "321fbd6d-a9a7-4547-ba74-5b108765427e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Burger\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/admins/{{admin_id}}/products/{{prod_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"admins",
+						"{{admin_id}}",
+						"products",
+						"{{prod_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an order- Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0f744668-cba0-44af-903a-11af2115f22d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/admins/{{admin_id}}/orders/{{order_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"admins",
+						"{{admin_id}}",
+						"orders",
+						"{{order_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a review - User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa818a79-ceeb-4dff-8d2d-c7bfae84bb23",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/users/{{user_id}}/reviews/{{review_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{user_id}}",
+						"reviews",
+						"{{review_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a product with the given ID - Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "29820b4b-f6a0-4fae-9238-93577282fe2a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/admins/{{admin_id}}/products/{{prod_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"admins",
+						"{{admin_id}}",
+						"products",
+						"{{prod_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a user with the given ID - Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "29820b4b-f6a0-4fae-9238-93577282fe2a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/admins/users/{{user_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"admins",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an admin with the given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6f7e9980-b135-4541-8933-90afedf37150",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){pm.response.to.have.status(200)});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/admins/{{admin_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"admins",
+						"{{admin_id}}"
 					]
 				}
 			},
 			"response": []
 		}
 	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"id": "7e800163-8a55-4e5e-9612-c424073c185b",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"id": "ee0c97da-ae53-475a-9016-45bcfd424105",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"id": "cd185905-a834-4211-8030-583d17702534",
-			"key": "host",
-			"value": "http://localhost:3000",
-			"type": "string"
-		}
-	]
+	"protocolProfileBehavior": {}
 }

@@ -20,7 +20,7 @@ router.post('/', function (req, res, next) {
   Admin.findById(adminId, function(err, admin){
     if (err) { return next(err); }
     if (admin === null) {
-      return res.status(404).json({ 'message': 'No Product found' });
+      return res.status(404).json({ 'message': 'No Admin found' });
     }
     product.save(function (err) {
       if (err) { return next(err); }

@@ -14,6 +14,7 @@ router.post('/', function (req, res, next) {
     lName: req.body.lName,
     email: req.body.email,
     mobileNumber: req.body.mobileNumber,
+    address: req.body.address,
     password: md5(req.body.password)
   });
 
@@ -24,12 +25,12 @@ router.post('/', function (req, res, next) {
 });
 
 // Return a list of all Users
-router.get('/', function (req, res, next) {
+/*router.get('/', function (req, res, next) {
   User.find(function (err, user) {
     if (err) { return next(err); }
     res.json({ 'users': user });
   });
-});
+});*/
 
 // Login an existing User
 router.get('/', function (req, res) {

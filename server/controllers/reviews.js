@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Review = require('../models/review');
+var User = require('../models/user');
 
 //Get Reviews
 router.get('/', function (req, res, next) {
@@ -31,12 +32,18 @@ router.post('/', function (req, res, next) {
 router.delete('/:id', function (req, res, next) {
   let userId = req.userId;
   var id = req.params.id;
-  Review.findOneAndDelete({ _id: id }, function (err, reviews) {
-    if (err) { return next(err); }
-    if (reviews === null) {
-      return res.status(404).json({ 'message': 'Review not found' });
+  User.findById(userId, function (err, user) {
+    if (err) return next(err);
+    if (user === null) {
+      return res.status(404).json({ 'message': ' User not found' });
     }
-    res.json(reviews);
+    Review.findOneAndDelete({ _id: id }, function (err, reviews) {
+      if (err) { return next(err); }
+      if (reviews === null) {
+        return res.status(404).json({ 'message': 'Review not found' });
+      }
+      res.json(reviews);
+    });
   });
 });
 
@@ -52,11 +59,5 @@ router.patch('/:id', function (req, res, next) {
   });
 
 });
-
-
-
-
-
-
 
 module.exports = router;

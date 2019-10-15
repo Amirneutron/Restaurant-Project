@@ -38,14 +38,15 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      error: false
+      
     };
   },
-  mounted(){
+  /*mounted(){
     this.adminSubmit();
 
-  }
-  ,
+  }*/
   methods: {
     adminSubmit(){
       Api.post("/admins/login", {
@@ -54,16 +55,20 @@ export default {
       }).then(response => {
           if (this.email === response.data.email) {
             alert(response.data._id);
-            var adminId = response.data._id
-            this.$router.push(`/admins/${adminId}`)
+            var adminId = response.data._id;
+            this.$router.push(`/admins/${adminId}`);
           }
         })
         .catch(error => {
-          console.log(this.error);
-        });
+         document.getElementById("p1").innerHTML = "Invaid username or password !";
+                var element = document.getElementById("p1");
+                element.classList.remove("cl");
+                this.error =true;
+        })
+
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

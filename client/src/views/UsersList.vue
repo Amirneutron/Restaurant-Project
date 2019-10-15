@@ -22,7 +22,7 @@ export default{
 
     },
     methods: {
-      getAllUsers(){
+      getAllUsers(id){
         Api.get('/admins/users')
         .then(reponse => {
           this.users = reponse.data.users  
@@ -35,7 +35,7 @@ export default{
     deleteUser(id) {
       Api.delete(`/users/${id}`)
         .then(response => {
-          console.log(response.data.message)
+         // console.log(response.data.message)
           var index = this.users.findIndex(user => user._id === id)
           this.users.splice(index, 1)
           alert("User has been deleted");

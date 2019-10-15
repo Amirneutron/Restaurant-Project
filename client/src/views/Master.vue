@@ -23,14 +23,14 @@ export default{
 			return{
         title:'Master'
       }
-    },
-    methods: {
+    }
+    ,methods: {
       getAllUsers(){
         this.$router.push({name: 'usersList'});
       },
       createProduct(){
         var adminId = this.$router.params.id
-        this.$router.push({name: 'createProduct', params:{adminId}});
+        this.$router.push({name: 'createProduct', params:{id:adminId}});
       }
     }
 	}

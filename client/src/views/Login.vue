@@ -49,11 +49,6 @@ export default {
       password: ""
     };
   },
-  mounted(){
-    this.loginSubmit();
-
-  }
-  ,
   methods: {
     loginSubmit() {
       Api.post("/users/login", {
@@ -68,7 +63,11 @@ export default {
           }
         })
         .catch(error => {
-          document.cookie = " ";
+         document.getElementById("p1").innerHTML = "Invaid username or password !";
+                var element = document.getElementById("p1");
+                element.classList.remove("cl");
+                this.error =true;
+
         });
       
     }

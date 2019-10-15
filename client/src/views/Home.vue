@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="top-container">
-      <img src="../assets/homepage.jpg" alt="Background Picture">
+
        <b-container class="bv-example-row">
          <b-row>
          <b-col v-for="product in products" :key="product._id">

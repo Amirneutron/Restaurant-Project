@@ -70,7 +70,7 @@ export default new Router({
       component: AdminLogin
     },
     {
-      path: '/admins/users',
+      path: '/admins/:id/users',
       name: 'usersList',
       component: UsersList
     },

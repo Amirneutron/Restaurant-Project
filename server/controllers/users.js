@@ -8,7 +8,7 @@ var productsController = require('./products');
 var reviewsController = require('./reviews');
 
 // Create a new user
-router.post('/', function (req, res, next) {
+router.post('/register', function (req, res, next) {
   var newUser = new User({
     fName: req.body.fName,
     lName: req.body.lName,
@@ -17,7 +17,6 @@ router.post('/', function (req, res, next) {
     address: req.body.address,
     password: md5(req.body.password)
   });
-
   newUser.save(function (err) {
     if (err) { return next(err); }
     res.status(201).json(newUser);
@@ -33,7 +32,7 @@ router.post('/', function (req, res, next) {
 });*/
 
 // Login an existing User
-router.get('/', function (req, res) {
+router.post('/login', function (req, res) {
   const email = req.body.email;
   const password = md5(req.body.password);
   User.findOne({ email: email }, function (err, foundUser) {
@@ -43,7 +42,8 @@ router.get('/', function (req, res) {
     else {
       if (foundUser) {
         if (foundUser.password === password) {
-          res.json(foundUser);
+          res.status(200).json(foundUser);
+         // res.status(200).json({'message': 'You are now logged in'});
         } else {
           return res.status(404).json({ 'message': 'Incorrect Password ' });
         }

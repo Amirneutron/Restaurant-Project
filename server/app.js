@@ -15,7 +15,7 @@ var ordersController = require('./controllers/orders');
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/restaurantDataBase';
-var port = process.env.PORT || 4000;
+var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {

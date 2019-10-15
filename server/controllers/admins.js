@@ -9,19 +9,19 @@ var reviewsController = require('./reviews');
 var ordersController = require('./orders');
 
 // Create a new admin
-router.post('/', function (req, res, next) {
+router.post('/register', function (req, res, next) {
   var newAdmin = new Admin({
     email: req.body.email,
     password: md5(req.body.password)
   });
   newAdmin.save(function (err) {
-    if (err) { return next(err); }
+    if (err) { res.status(404).json({ 'message': 'Email already exists ' }); }
     res.status(201).json(newAdmin);
   });
 });
 
 // Login an existing Admin
-router.get("/", function (req, res) {
+router.post("/login", function (req, res) {
   const adminEmail = req.body.email;
   const adminPassword = md5(req.body.password);
   Admin.findOne({ email: adminEmail }, function (err, foundAdmin) {

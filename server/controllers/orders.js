@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
 
 //Create a new  order
 router.post('/', function (req, res, next) {
-  let userId = req.userId;
+  let userId = req.params._id;
   var newOrder = Order({
     orderedBy: userId
   });

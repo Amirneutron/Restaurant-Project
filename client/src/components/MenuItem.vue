@@ -1,5 +1,5 @@
 <template>
-<div id="productV">
+    <div id="product">
   <div class="flip-card">
     <div class="flip-card-inner">
       <div class="flip-card-front">
@@ -10,19 +10,21 @@
         <p class="currencyInfo">{{ product.price }} <span id="currencyTag">SEK</span></p>
         <p>{{ product.content }}</p>
         <b-button @click="goTodetail(product._id)" >View product</b-button>
+         <b-button @click="editProduct(product._id)" >Edit product</b-button>
+          <b-button @click="deleteProduct(product._id)" >Delete product</b-button>
       </div>
     </div>
   </div>
   </div>
 </template>
-
 <script>
+
 import { Api } from '@/Api'
 
-    export default {
-        name: 'product-item',
-        props: ['product'],
-        methods:{
+export default {
+    name: 'menu-item',
+    props: ['menu'],
+    methods:{
            goTodetail(productId) {
             Api.get(`products/${productId}`)
             .then(response => {
@@ -35,8 +37,7 @@ import { Api } from '@/Api'
            
           }
   }
-    }
-
+}
 </script>
 
 <style scoped>

@@ -6,7 +6,8 @@
             <label for="price"><b>Product price</b></label>
             <input type="number" placeholder=" Enter product price in SEK" v-model="price" required>
             <label for="image"><b>Select product image</b></label>
-            <select type="file" name="image" v-model="image">
+            <input type="text" placeholder=" Enter product image" v-model="image" required>
+            <!--<select type="file" name="image" v-model="image">
                 <option>spicy.jpg</option>
                 <option>kebabPizza.jpg</option>
                 <option>gardenClassic.jpg</option>
@@ -17,7 +18,7 @@
                 <option>veggiePizza.jpg</option>
                 <option>hawaii.jpg</option>
                 <option>bbqChickenPizza.jpg</option>             
-            </select>
+            </select>-->
             <br>
             <label for="content"><b>Product content</b></label>
             <input type="text" placeholder="Enter product content" v-model="content" required>
@@ -45,8 +46,8 @@ export default {
       },
       created(){
           this.adminId = this.$route.params.id
-      },
-      methods:{
+      }
+      ,methods:{
           createProduct(){
               Api.post('/admins/' + this.adminId + '/products',{
                   name: this.name,
@@ -54,9 +55,9 @@ export default {
                   image: this.image,
                   content: this.content
               }).then(response=>{   
-                   this.products.push(response.data) 
+                  // this.products.push(response.data) 
                    alert("Product has been created");
-                   this.$router.push({name: 'master'})                   
+                   this.$router.push({name: 'master'});                
                 }).catch(error=>{
                     this.products = []
                     console.log(error);

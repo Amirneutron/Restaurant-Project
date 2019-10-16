@@ -1,36 +1,62 @@
 <template>
   <div>
+    <h1>Admin : {{active}}</h1>
+
+    <hr>  
     <button @click="getAllUsers"> Get all users</button>
+    <hr>
+    <button @click="getAllUsers"> Delete a specific user</button>
     <hr>
     <button @click="createProduct"> Create a new product</button>
     <hr>
-    <button> Edit product</button>
+    <button @click="getAllProducts"> Get all products</button>
     <hr>
-    <button> Get all products</button>
-    <hr>
-    <button> Delete admin my account</button>
-    <hr>
-    <button> Delete a specific user</button>
+    <button @click="getAllProducts"> Edit product</button>
     <hr>
     <button>Delete a product</button>   
+    <hr>
+    <button @click="deleteAdmin"> Delete admin my account</button>
+    <hr>
+  
   </div>
 </template>
 
 <script>
+import { Api } from '@/Api'
+
 export default{
     name: 'Master',  
 		data (){
 			return{
-        title:'Master'
+        title:'Master',
+        active: "Active",
+        status: this.$route.params.id
       }
+    }
+    ,created(){
+      var adminId = this.$route.params.id
+      this.id = this.$route.params.id
     }
     ,methods: {
       getAllUsers(){
         this.$router.push({name: 'usersList'});
       },
-      createProduct(){
-        var adminId = this.$router.params.id
-        this.$router.push({name: 'createProduct', params:{id:adminId}});
+      createProduct(adminId){
+        this.$router.push({name: 'createProduct'});
+      },
+      deleteAdmin(){
+        Api.delete('/admins/' + this.id)
+        .then(response => {
+          console.log(response.data.message)
+          alert("Account has been deleted");
+          this.$router.push({name: 'adminLogin'});    
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      },
+      getAllProducts(){
+        this.$router.push('/products')
       }
     }
 	}

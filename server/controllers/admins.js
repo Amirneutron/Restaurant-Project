@@ -44,8 +44,8 @@ router.post("/login", function (req, res) {
 });
 //Delete the admin
 router.delete('/:id', function (req, res, next) {
-  var id = req.params.id;
-  Admin.findOneAndDelete({ _id: id }, function (err, admin) {
+  var adminId = req.params.id;
+  Admin.findOneAndDelete({ _id: adminId }, function (err, admin) {
     if (err) { return next(err); }
     if (admin === null) {
       return res.status(404).json({ 'message': 'Admin not found' });
@@ -53,6 +53,7 @@ router.delete('/:id', function (req, res, next) {
     res.json(admin);
   });
 });
+
 
 // Return a list of all Users
 router.get('/users', function (req, res, next) {

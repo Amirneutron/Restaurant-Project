@@ -58,7 +58,7 @@ export default {
       .then(response => {
         this.products=response.data.products;
       }).catch(error =>{
-        ths.message = error
+        this.message = error
       });
     }
   },

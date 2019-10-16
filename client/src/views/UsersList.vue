@@ -22,7 +22,7 @@ export default{
 
     },
     methods: {
-      getAllUsers(id){
+      getAllUsers(){
         Api.get('/admins/users')
         .then(reponse => {
           this.users = reponse.data.users  

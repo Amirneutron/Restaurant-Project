@@ -30,8 +30,8 @@
 
       <div class="container" style="background-color:#f1f1f1">
         <span class="psw">
-          Forgot
-          <a href="/adminLogin">Admin Portal</a>
+          New User?
+          <a href="/register">Register</a>
         </span>
       </div>
     </form>

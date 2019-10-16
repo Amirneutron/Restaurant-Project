@@ -11,6 +11,7 @@ import Master from './views/Master.vue'
 import AdminLogin from './views/AdminLogin.vue'
 import UsersList from './views/UsersList.vue'
 import CreateProduct from './views/CreateProduct.vue'
+import AdminRegister from './views/AdminRegister.vue'
 
 
 
@@ -68,6 +69,11 @@ export default new Router({
       path: '/adminLogin',
       name: 'adminLogin',
       component: AdminLogin
+    },
+    {
+      path: '/registerAdmin',
+      name: 'registerAdmin',
+      component: AdminRegister
     },
     {
       path: '/admins/:id/users',

@@ -11,22 +11,23 @@
     <form class="login-form"  @submit.prevent="adminSubmit">
       <div class="imgcontainer">
         <img src="..\assets\avatar.png" alt="Avatar" class="avatar" />
-        <h2> Log In To Admin Portal</h2>
+        <h2> Register To Admin Portal</h2>
       </div>
       <div class="container">
-        <label for="email">
-          <b>Username</b>
-        </label>
-        <input type="email" placeholder="Enter email address" v-model="email" />
+        <label for="email"><b>Email</b></label>
+        <input type="email" placeholder="Email address" required v-model="email">
 
-        <label for="password">
-          <b>Password</b>
-        </label>
-        <input type="password" placeholder="Enter password" v-model="password" />
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Email your password" required v-model="password">
 
-        <b-button type="submit" class="clicker" variant="danger">Log in as an admin</b-button>
+        <label for="psw"><b>Repeat Password</b></label>
+        <input type="password" placeholder="Email your password" required v-model="password">
+
+        <hr>
+
+        <b-button type="submit" class="clicker" variant="danger">CREATE ACCOUNT</b-button>
       </div>
-          <b-button href="/registerAdmin">Create New Account</b-button>
+          <b-button href="/adminLogin">Already have an account? Login</b-button>
     </form>
   </div>
 </template>
@@ -50,21 +51,15 @@ export default {
   }*/
   methods: {
     adminSubmit(){
-      Api.post("/admins/login", {
+      Api.post("/admins/register", {
         email: this.email,
         password: this.password
       }).then(response => {
-          if (this.email === response.data.email) {
-            alert(response.data._id);
-            var adminId = response.data._id;
-            this.$router.push(`/admins/${adminId}`);
-          }
+            alert("You are now registered, click OK to log in");
+            this.$router.push('/adminLogin');       
         })
         .catch(error => {
-         document.getElementById("p1").innerHTML = "Invaid username or password !";
-                var element = document.getElementById("p1");
-                element.classList.remove("cl");
-                this.error =true;
+         alert("This email address already exists");
         })
 
     }

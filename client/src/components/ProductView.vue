@@ -31,7 +31,6 @@ export default {
     border: 1px solid #f1f1f1;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
   }
-
   /* This container is needed to position the front and back side */
   .flip-card-inner {
     position: relative;

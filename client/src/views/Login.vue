@@ -10,7 +10,6 @@
 
     <form class="login-form" @submit.prevent="loginSubmit">
       <div class="imgcontainer">
-        <img src="..\assets\avatar.png" alt="Avatar" class="avatar" />
       </div>
 
       <div class="container">

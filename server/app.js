@@ -39,7 +39,7 @@ app.use(cors());
 
 // Define routes
 app.get('/api', function(req, res) {
-    res.json({'message': 'Welcome To Our Food System!'});
+    res.json({'message': 'Food that actually tastes good! !'});
 });
 app.use('/api/camels', camelsController);
 app.use('/api/users', usersController);

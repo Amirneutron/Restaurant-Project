@@ -10,7 +10,6 @@
 
     <form class="login-form"  @submit.prevent="adminSubmit">
       <div class="imgcontainer">
-        <img src="..\assets\avatar.png" alt="Avatar" class="avatar" />
         <h2> Log In To Admin Portal</h2>
       </div>
       <div class="container">

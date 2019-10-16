@@ -2,7 +2,7 @@
   <div>
     <h1>Admin : {{active}}</h1>
 
-    <hr>  
+    <hr>
     <button @click="getAllUsers"> Get all users</button>
     <hr>
     <button @click="getAllUsers"> Delete a specific user</button>
@@ -13,11 +13,11 @@
     <hr>
     <button> Edit product</button>
     <hr>
-    <button>Delete a product</button>   
+    <button>Delete a product</button>
     <hr>
-    <button> Delete admin my account</button>
+    <button> Delete my account</button>
     <hr>
-  
+
   </div>
 </template>
 
@@ -25,7 +25,7 @@
 import { Api } from '@/Api'
 
 export default{
-    name: 'Master',  
+    name: 'Master',
 		data (){
 			return{
         title:'Master',
@@ -49,7 +49,7 @@ export default{
         .then(response => {
           console.log(response.data.message)
           alert("Account has been deleted");
-          this.$router.push({name: 'adminLogin'});    
+          this.$router.push({name: 'adminLogin'});
         })
         .catch(error => {
           console.log(error)

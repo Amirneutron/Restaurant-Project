@@ -1,14 +1,11 @@
 <template>
     <div>
         <h2>List Of All Products {{products.length}}</h2>
-        <b-container class="bv-example-row">
-         <b-row>
-         <b-col v-for="product in products" :key="product._id">
-           <product-view :product="product"></product-view>
-         </b-col>
-       </b-row>
-       </b-container>
-    </div>
+        <b-list-group>
+         <product-view v-for="product in products" :key="product._id" :product="product" @delete-product="deleteProduct"></product-view>
+        </b-list-group>
+
+    </div>   
 </template>
 
 
@@ -40,6 +37,19 @@ export default {
             this.products = []
             console.log(error)
             })
+      },
+      deleteProduct(id){
+          Api.delete('/admins/'+ this.adminId + '/products/' + id)
+        .then(response => {
+          console.log(response.data)
+          var index = this.products.findIndex(product => product._id === id)
+          this.products.splice(index, 1)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
+
       }
 
     },

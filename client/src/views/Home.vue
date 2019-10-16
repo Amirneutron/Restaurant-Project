@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="top-container">
-
        <b-container class="bv-example-row">
          <b-row>
          <b-col v-for="product in products" :key="product._id">
@@ -45,7 +44,7 @@ export default {
   },
   methods: {
     getMessage() {
-      axios.get(`/`)
+      Api.get(`/`)
         .then(response => {
           this.message = response.data.message;
         })

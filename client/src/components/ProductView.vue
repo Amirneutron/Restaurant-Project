@@ -1,20 +1,11 @@
 <template>
     <div id="product">
-  <div class="flip-card">
-    <div class="flip-card-inner">
-      <div class="flip-card-front">
         <h3>{{product.name}}</h3>
-        <img id = "imageHolder" :src="'../images/' + product.image" v-bind:alt="product.image" style="width:300px;height:200px;">
-      </div>
-      <div class="flip-card-back">
         <p class="currencyInfo">{{ product.price }} <span id="currencyTag">SEK</span></p>
         <p>{{ product.content }}</p>
-        <b-button @click="goTodetail(product._id)" >View product</b-button>
-         <b-button @click="editProduct(product._id)" >Edit product</b-button>
-          <b-button @click="deleteProduct(product._id)" >Delete product</b-button>
-      </div>
-    </div>
-  </div>
+        <b-button :href="'/products/' + product._id" >View product</b-button>
+        <b-button>Edit product</b-button>
+        <b-button>Delete product</b-button>
   </div>
 </template>
 <script>
@@ -22,21 +13,8 @@
 import { Api } from '@/Api'
 
 export default {
-    name: 'menu-item',
-    props: ['menu'],
-    methods:{
-           goTodetail(productId) {
-            Api.get(`products/${productId}`)
-            .then(response => {
-              this.products= response.data.products
-              this.$router.push({name:'info', params:{Pid:productId}})
-            }).catch(error =>{
-              this.products = []
-              console.log(error);
-            })
-           
-          }
-  }
+    name: 'product-view',
+    props: ['product']
 }
 </script>
 

@@ -24,21 +24,7 @@
 
 export default {
   name: 'user-item',
-  props: ['user'],
-  methods: {
-      getAllUsers(){
-        Api.get('/users')
-        .then(reponse => {
-          this.users = reponse.data.users
-          this.$router.push({name:'usersList'});
-        })
-        .catch(error => {
-          this.users = []
-          console.log(error)
-        })
-      }
-
-  }
+  props: ['user']
 }
 </script>
 

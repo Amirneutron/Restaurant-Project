@@ -12,6 +12,7 @@ import AdminLogin from './views/AdminLogin.vue'
 import UsersList from './views/UsersList.vue'
 import CreateProduct from './views/CreateProduct.vue'
 import AdminRegister from './views/AdminRegister.vue'
+import ProductsList from './views/ProductsList.vue'
 
 
 
@@ -84,6 +85,11 @@ export default new Router({
       path: '/admins/:id/products',
       name: 'createProduct',
       component: CreateProduct
+    },
+    {
+      path: '/admins/:id/menus',
+      name: 'productList',
+      component: ProductsList
     }
 
   ]

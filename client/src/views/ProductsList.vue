@@ -1,55 +1,53 @@
 <template>
     <div>
-        <h2>List Of All Products</h2>
-         <menu-item v-for="user in users" :key="user._id" :user="user" @delete-user="deleteUser"></menu-item>
+        <h2>List Of All Products {{products.length}}</h2>
+        <b-container class="bv-example-row">
+         <b-row>
+         <b-col v-for="product in products" :key="product._id">
+           <product-view :product="product"></product-view>
+         </b-col>
+       </b-row>
+       </b-container>
     </div>
 </template>
 
 
 <script>
 import { Api } from "@/Api";
-import MenuItem from "@/components/MenuItem";
+import ProductView from "@/components/ProductView";
 
-export default{
-		name:'Users',
-		data (){
-			return{
-                products:[]
-			}
+export default {
+    name: 'ListProducts',
+    data(){
+        return{
+            products: []
+        }
     },
     mounted(){
-        this.getAllUsers();
+        this.getAllProducts()
 
+    },
+    created(){
+        this.adminId = this.$route.params.id
     },
     methods: {
-      getAllUsers(){
-        Api.get('/admins/products')
-        .then(reponse => {
-          this.products = reponse.data.products  
-        })
-        .catch(error => {
-          this.products = []
-          console.log(error)
-        })
+        getAllProducts(){
+            Api.get('/admins/'+ this.adminId + '/products')
+            .then(response => {
+            this.products = response.data.products  
+            })
+            .catch(error => {
+            this.products = []
+            console.log(error)
+            })
       }
-     /* ,
-    deleteUser(id) {
-      Api.delete(`/users/${id}`)
-        .then(response => {
-         // console.log(response.data.message)
-          var index = this.users.findIndex(user => user._id === id)
-          this.users.splice(index, 1)
-          alert("User has been deleted");
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    }*/
 
     },
-    components:{
-      MenuItem
+    components: {
+        ProductView
+
     }
+
 }
 </script>
 <style scoped>

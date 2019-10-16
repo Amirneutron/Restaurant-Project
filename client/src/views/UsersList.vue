@@ -10,7 +10,7 @@
 import { Api } from "@/Api";
 import UserItem from "@/components/UserItem";
 
-export default{
+export default {
 		name:'Users',
 		data (){
 			return{
@@ -24,8 +24,8 @@ export default{
     methods: {
       getAllUsers(){
         Api.get('/admins/users')
-        .then(reponse => {
-          this.users = reponse.data.users  
+        .then(response => {
+          this.users = response.data.users  
         })
         .catch(error => {
           this.users = []

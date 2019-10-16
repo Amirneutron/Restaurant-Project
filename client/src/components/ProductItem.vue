@@ -9,7 +9,7 @@
       <div class="flip-card-back">
         <p class="currencyInfo">{{ product.price }} <span id="currencyTag">SEK</span></p>
         <p>{{ product.content }}</p>
-        <b-button @click="goTodetail(product._id)" >View product</b-button>
+        <b-button :href="'/products/' + product._id" >View product</b-button>
       </div>
     </div>
   </div>
@@ -21,20 +21,7 @@ import { Api } from '@/Api'
 
     export default {
         name: 'product-item',
-        props: ['product'],
-        methods:{
-           goTodetail(productId) {
-            Api.get(`products/${productId}`)
-            .then(response => {
-              this.products= response.data.products
-              this.$router.push({name:'info', params:{Pid:productId}})
-            }).catch(error =>{
-              this.products = []
-              console.log(error);
-            })
-           
-          }
-  }
+        props: ['product']
     }
 
 </script>

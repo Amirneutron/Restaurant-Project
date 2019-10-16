@@ -11,11 +11,11 @@
     <hr>
     <button @click="getAllProducts"> Get all products</button>
     <hr>
-    <button @click="getAllProducts"> Edit product</button>
+    <button> Edit product</button>
     <hr>
     <button>Delete a product</button>   
     <hr>
-    <button @click="deleteAdmin"> Delete admin my account</button>
+    <button> Delete admin my account</button>
     <hr>
   
   </div>
@@ -56,7 +56,8 @@ export default{
         })
       },
       getAllProducts(){
-        this.$router.push('/products')
+        var adminId = this.$route.params.id
+        this.$router.push(`/admins/${adminId}/menus`)
       }
     }
 	}

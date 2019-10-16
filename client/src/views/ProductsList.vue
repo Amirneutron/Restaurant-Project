@@ -14,7 +14,7 @@ export default{
 		name:'Users',
 		data (){
 			return{
-                users:[]
+                products:[]
 			}
     },
     mounted(){
@@ -23,15 +23,16 @@ export default{
     },
     methods: {
       getAllUsers(){
-        Api.get('/admins/users')
+        Api.get('/admins/products')
         .then(reponse => {
-          this.users = reponse.data.users  
+          this.products = reponse.data.products  
         })
         .catch(error => {
-          this.users = []
+          this.products = []
           console.log(error)
         })
-      },
+      }
+     /* ,
     deleteUser(id) {
       Api.delete(`/users/${id}`)
         .then(response => {
@@ -43,7 +44,7 @@ export default{
         .catch(error => {
           console.log(error)
         })
-    }
+    }*/
 
     },
     components:{

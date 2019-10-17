@@ -63,6 +63,7 @@ export default new Router({
     },
     {
       path: '/admins/:id',
+      beforeEnter:checkAuth,
       name: 'master',
       component: Master
     },
@@ -78,19 +79,30 @@ export default new Router({
     },
     {
       path: '/admins/:id/users',
+      beforeEnter:checkAuth,
       name: 'usersList',
       component: UsersList
     },
     {
       path: '/admins/:id/products',
+      beforeEnter:checkAuth,
       name: 'createProduct',
       component: CreateProduct
     },
     {
       path: '/admins/:id/menus',
+      beforeEnter:checkAuth,
       name: 'productList',
       component: ProductsList
     }
 
   ]
-})
+});
+function checkAuth(to, from, next) {
+
+  if (document.cookie ==="") {
+    next('/')
+  } else {
+    next(); // we are authorized, continue on to the requested route
+  }
+}

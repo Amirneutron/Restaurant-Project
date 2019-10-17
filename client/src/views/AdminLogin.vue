@@ -40,7 +40,7 @@ export default {
       email: "",
       password: "",
       error: false
-      
+
     };
   },
   /*mounted(){
@@ -56,6 +56,8 @@ export default {
           if (this.email === response.data.email) {
             alert(response.data._id);
             var adminId = response.data._id;
+            if (document.cookie===""){
+              document.cookie = "username=John Doe; expires=Thu, 18 Dec 2021 12:00:00 UTC; path=/";}
             this.$router.push(`/admins/${adminId}`);
           }
         })

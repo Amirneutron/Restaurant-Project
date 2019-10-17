@@ -1,10 +1,20 @@
 <template>
   <div>
     <div class="top-container">
+
       <h1>{{message}} <br><span>Trust me</span> </h1>
       <b-button @click="registerNew" id="sign-up" variant="danger">Register</b-button>
       <b-button @click="logIn" variant="outline-dark">Log in</b-button>
       <hr>
+
+
+       <b-container class="bv-example-row">
+         <b-row>
+         <b-col v-for="product in products" :key="product._id">
+           <product-item :product="product"></product-item>
+         </b-col>
+       </b-row>
+       </b-container>
 
 
      <!-- <button><a href="/register" role="button" aria-pressed="true">SIGN UP</a></button>-->

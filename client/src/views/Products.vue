@@ -9,15 +9,13 @@
        </b-row>
        </b-container>
 
-
 </div>
-
 
 </template>
 
 <script>
-    import { Api } from '@/Api'
-    import ProductItem from "../components/ProductItem";
+import { Api } from '@/Api'
+import ProductItem from '../components/ProductItem'
 
     export default {
         name: 'Products',
@@ -35,8 +33,9 @@
                     .then(response => {
                         this.products = response.data.products
                     })
+                    // eslint-disable-next-line handle-callback-err
                     .catch(error => {
-                        alert("error here")
+                        alert('error here')
                     })
             },
         },

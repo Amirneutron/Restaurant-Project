@@ -6,9 +6,11 @@ var User = require('../models/user');
 
 //Get Reviews
 router.get('/', function (req, res, next) {
-  Review.find(function (err, reviews) {
-    if (err) { return next(err); }
-    res.json({ 'reviews': reviews });
+  return Review.find(function (err,reviews) {
+  }).populate('reviewer','fName lName').exec((err, reviews) => {
+    if(err) return next(err);
+    console.log();
+    res.json(reviews);
   });
 });
 

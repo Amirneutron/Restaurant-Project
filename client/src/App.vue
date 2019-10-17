@@ -29,7 +29,6 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-   
 
    <div class="container">
       <transition name="moveInUp">
@@ -41,10 +40,22 @@
 
 <script>
 export default {
+
+  methods:{
+    signedIn(){
+      if (this.$route.params.id === '') {
+        this.$route.push('/login')
+        return false
+      } else {
+        return true
+      }
+    }
+
   data() {
     return {
       login: "Log out"
  }
+
   }
 }
 </script>

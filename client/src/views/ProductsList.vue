@@ -1,13 +1,15 @@
 <template>
     <div>
         <h2>List Of All Products {{products.length}}</h2>
-        <b-list-group>
-         <product-view v-for="product in products" :key="product._id" :product="product" @delete-product="deleteProduct"></product-view>
+        <button type="button" class="btn btn-danger" @click="deleteAllProduct">Delete All Products</button>
+        <b-list-group >
+        <b-list-group-item ><product-view v-for="product in products" :key="product._id" 
+        :product="product" @delete-product="deleteProduct" 
+        @edit-product="editProduct" @view-product="viewProduct"></product-view>       
+        </b-list-group-item>
         </b-list-group>
-
     </div>   
 </template>
-
 
 <script>
 import { Api } from "@/Api";
@@ -22,7 +24,6 @@ export default {
     },
     mounted(){
         this.getAllProducts()
-
     },
     created(){
         this.adminId = this.$route.params.id
@@ -48,10 +49,24 @@ export default {
         .catch(error => {
           console.log(error)
         })
-
+      },
+      editProduct(id){
+          this.$router.push({name: 'editproduct', params:{id: id}});
+      },
+      viewProduct(id){
+          this.$router.push('/products/' + id)
+      },
+      deleteAllProducts(){
+          Api.delete('/admins/' + this.adminId + '/products')
+        .then(response => {
+          alert("Are you sure you want to delete all products ?")
+          this.products = []
+        })
+        .catch(error => {
+          console.log(error)
+        })
 
       }
-
     },
     components: {
         ProductView

@@ -5,17 +5,7 @@
       <h1>{{message}} <br><span>Trust me</span> </h1>
       <b-button @click="registerNew" id="sign-up" variant="danger">Register</b-button>
       <b-button @click="logIn" variant="outline-dark">Log in</b-button>
-      <hr>
-
-
-       <b-container class="bv-example-row">
-         <b-row>
-         <b-col v-for="product in products" :key="product._id">
-           <product-item :product="product"></product-item>
-         </b-col>
-       </b-row>
-       </b-container>
-
+      <hr>   
 
      <!-- <button><a href="/register" role="button" aria-pressed="true">SIGN UP</a></button>-->
     </div>
@@ -29,7 +19,7 @@
     <div class="bottom-container">
       <h1>Reviews</h1>
       <p>We value what our customers have to say about our Restaurant and we are constantly after improving our services accordingly</p>
-      <carousel :per-page="1" :navigate-to="someLocalProperty" :mouse-drag="false" autoplay="true" loop="true">
+      <carousel :per-page="1"  :mouse-drag="false" :autoplay="true" :loop="true">
 
         <slide v-for="review in reviews" :key="review._id" >
           <review-item  :review="review"></review-item>
@@ -46,7 +36,6 @@
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
-import ProductItem from '../components/ProductItem'
 import ReviewItem from '../components/ReviewItem'
 import { Carousel, Slide } from 'vue-carousel';
 export default {
@@ -55,15 +44,13 @@ export default {
     return {
       message: '',
       reviews: [],
-      cooky: false,
-      products: []
+      cooky: false
 
     }
   },
   mounted() {
     this.getMessage()
-    this.getProducts()
-      this.getReviews()
+    this.getReviews()
   },
   methods: {
       registerNew(){
@@ -80,9 +67,7 @@ export default {
               .catch(error => {
                   this.message = error
               })
-
       },
-
     getMessage() {
       Api.get(`/`)
         .then(response => {
@@ -91,18 +76,9 @@ export default {
         .catch(error => {
           this.message = error
         })
-    },
-    getProducts() {
-      Api.get('/products')
-        .then(response => {
-          this.products = response.data.products
-        }).catch(error => {
-          this.message = error
-        })
     }
   },
   components: {
-    ProductItem,
       ReviewItem,Carousel,
       Slide
   }

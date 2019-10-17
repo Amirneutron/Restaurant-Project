@@ -53,6 +53,14 @@ router.patch('/:id', function (req, res, next) {
   });
 });
 
+//Delete all products
+router.delete('/', function(req, res, next) {
+  Product.remove({}, function(err,response) {
+      if (err) { return next(err); }
+      res.json(response);
+  });
+});
+
 // Delete a product by its ID
 router.delete('/:id', function (req, res, next) {
   var id = req.params.id;

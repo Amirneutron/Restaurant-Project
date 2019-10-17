@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h2>List Of All Users</h2>
+        <h2>List Of All Users {{users.length}}</h2>
+        <button type="button" @click="deleteAllUsers" class="btn btn-danger">Delete All Users</button>
+      
          <user-item v-for="user in users" :key="user._id" :user="user" @delete-user="deleteUser"></user-item>
     </div>
 </template>
@@ -14,7 +16,7 @@ export default {
 		name:'Users',
 		data (){
 			return{
-                users:[]
+          users:[]
 			}
     },
     mounted(){
@@ -43,7 +45,18 @@ export default {
         .catch(error => {
           console.log(error)
         })
-    }
+    },
+    deleteAllUsers(){
+          Api.delete('/users')
+        .then(response => {
+          alert("Are you sure you want to delete all users ?")
+          this.users = []
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
+      }
 
     },
     components:{

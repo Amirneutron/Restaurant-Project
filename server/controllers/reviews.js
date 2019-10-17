@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
   });
 });
 
-// Create a new Review for a specific restaurant
+// Create a new Review 
 router.post('/', function (req, res, next) {
   let userId = req.userId;
   var newReview = new Review({

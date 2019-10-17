@@ -19,6 +19,8 @@
     <hr>
     <button @click="logOut"> Log Out of my account</button>
     <hr>
+    <button @click="logOut"> Log Out of my account</button>
+    <hr>
   </div>
 </template>
 
@@ -36,6 +38,8 @@ export default{
     ,created(){
       var adminId = this.$route.params.id
       this.id = this.$route.params.id
+    },mounted(){
+        this.logInCheck();
     }
     ,methods: {
           logOut(){

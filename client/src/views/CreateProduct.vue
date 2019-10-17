@@ -17,7 +17,7 @@
                 <option>tropical.jpg</option>
                 <option>veggiePizza.jpg</option>
                 <option>hawaii.jpg</option>
-                <option>bbqChickenPizza.jpg</option>             
+                <option>bbqChickenPizza.jpg</option>
             </select>-->
             <br>
             <label for="content"><b>Product content</b></label>
@@ -43,28 +43,35 @@ export default {
                 image: '',
                 content: ''
           }
-      },
+      },mounted(){
+        this.logInCheck();
+    },
       created(){
           this.adminId = this.$route.params.id
       }
       ,methods:{
-          createProduct(){
-              Api.post('/admins/' + this.adminId + '/products',{
-                  name: this.name,
-                  price: this.price,
-                  image: this.image,
-                  content: this.content
-              }).then(response=>{   
-                  // this.products.push(response.data) 
-                   alert("Product has been created");
-                   this.$router.push({name: 'master'});                
+            createProduct(){
+                Api.post('/admins/' + this.adminId + '/products',{
+                    name: this.name,
+                    price: this.price,
+                    image: this.image,
+                    content: this.content
+                }).then(response=>{
+                    // this.products.push(response.data)
+                    alert("Product has been created");
+                    this.$router.push({name: 'master'});
                 }).catch(error=>{
                     this.products = []
                     console.log(error);
                 });
-          }
+            },logInCheck(){
 
-      }
+            if(document.cookie === ""){
+                this.$router.push('/adminLogin');
+            }
+
+        }
+    }
 }
 </script>
 

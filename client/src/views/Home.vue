@@ -21,6 +21,7 @@
       <p>We value what our customers have to say about our Restaurant and we are constantly after improving our services accordingly</p>
       <carousel :per-page="1"  :mouse-drag="false" :autoplay="true" :loop="true">
 
+
         <slide v-for="review in reviews" :key="review._id" >
           <review-item  :review="review"></review-item>
         </slide>

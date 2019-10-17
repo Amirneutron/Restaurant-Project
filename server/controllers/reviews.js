@@ -14,6 +14,21 @@ router.get('/', function (req, res, next) {
   });
 });
 
+
+//Get Reviews for a specific User
+router.get('/myReviews', function (req, res, next) {
+  let userId = req.userId
+  console.log(userId);
+  return Review.find({reviewer:userId},function (err,reviews) {
+  }).populate('reviewer','fName lName').exec((err, reviews) => {
+    if(err) return next(err);
+    console.log();
+    res.json(reviews);
+  });
+});
+
+
+
 // Create a new Review 
 router.post('/', function (req, res, next) {
   let userId = req.userId;

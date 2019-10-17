@@ -21,13 +21,14 @@ export default {
     },
     mounted(){
         this.getAllUsers();
+        this.logInCheck();
 
     },
     methods: {
       getAllUsers(){
         Api.get('/admins/users')
         .then(response => {
-          this.users = response.data.users  
+          this.users = response.data.users
         })
         .catch(error => {
           this.users = []
@@ -45,6 +46,13 @@ export default {
         .catch(error => {
           console.log(error)
         })
+
+    },logInCheck(){
+
+            if(document.cookie === ""){
+                this.$router.push('/adminLogin');
+            }
+
     },
     deleteAllUsers(){
           Api.delete('/users')
@@ -57,7 +65,7 @@ export default {
         })
 
       }
-
+    }
     },
     components:{
       UserItem
@@ -70,7 +78,7 @@ table, th, td{
     padding: 5px;
 }
 table{
-    border-spacing: 5px; 
+    border-spacing: 5px;
 }
 
 </style>

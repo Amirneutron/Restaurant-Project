@@ -13,7 +13,12 @@ import UsersList from './views/UsersList.vue'
 import CreateProduct from './views/CreateProduct.vue'
 import AdminRegister from './views/AdminRegister.vue'
 import ProductsList from './views/ProductsList.vue'
+
+import UserPortal from "./views/UserPortal.vue";
+import Review from './views/Review.vue'
+
 import EditProduct from './views/EditProduct.vue'
+
 
 
 
@@ -25,11 +30,6 @@ export default new Router({
   routes: [
     { path: '/',
       name:'home',
-      component: Home
-    },
-    {
-      path: `/users/:id`,
-      name: 'home',
       component: Home
     },
     {
@@ -64,6 +64,7 @@ export default new Router({
     },
     {
       path: '/admins/:id',
+      beforeEnter:checkAuth,
       name: 'master',
       component: Master
     },
@@ -79,24 +80,45 @@ export default new Router({
     },
     {
       path: '/admins/:id/users',
+      beforeEnter:checkAuth,
       name: 'usersList',
       component: UsersList
     },
     {
       path: '/admins/:id/products',
+      beforeEnter:checkAuth,
       name: 'createProduct',
       component: CreateProduct
     },
     {
       path: '/admins/:id/menus',
+      beforeEnter:checkAuth,
       name: 'productList',
       component: ProductsList
     },
     {
+    path:'/users/:id',
+      name: 'userPortal',
+      component: UserPortal
+    },
+    {
+      path: '/users/:id/reviews/',
+      name: 'showReviews',
+      component: Review
+    },
       path: '/products/:id/edit',
       name: 'editproduct',
       component: EditProduct
+   
     }
 
   ]
-})
+});
+function checkAuth(to, from, next) {
+
+  if (document.cookie ==="") {
+    next('/')
+  } else {
+    next(); // we are authorized, continue on to the requested route
+  }
+}

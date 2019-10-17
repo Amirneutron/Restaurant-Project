@@ -82,7 +82,7 @@ export default {
   font-weight: bold;
 }
 .white:hover {
-  color: yellow;
+  color: #45454d;
   text-decoration: none;
 }
 .bold {

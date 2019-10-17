@@ -13,7 +13,8 @@ import UsersList from './views/UsersList.vue'
 import CreateProduct from './views/CreateProduct.vue'
 import AdminRegister from './views/AdminRegister.vue'
 import ProductsList from './views/ProductsList.vue'
-
+import UserPortal from "./views/UserPortal.vue";
+import Review from './views/Review.vue'
 
 
 Vue.use(Router)
@@ -24,11 +25,6 @@ export default new Router({
   routes: [
     { path: '/',
       name:'home',
-      component: Home
-    },
-    {
-      path: `/users/:id`,
-      name: 'home',
       component: Home
     },
     {
@@ -94,6 +90,16 @@ export default new Router({
       beforeEnter:checkAuth,
       name: 'productList',
       component: ProductsList
+    },
+    {
+    path:'/users/:id',
+      name: 'userPortal',
+      component: UserPortal
+    },
+    {
+      path: '/users/:id/reviews/',
+      name: 'showReviews',
+      component: Review
     }
 
   ]

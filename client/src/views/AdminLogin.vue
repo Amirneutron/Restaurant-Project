@@ -117,7 +117,7 @@ img {
 }
 .form input {
   font-family: "Roboto", sans-serif;
-  outline: 1;
+
   background: #f2f2f2;
   width: 100%;
   border: 0;

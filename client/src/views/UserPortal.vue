@@ -3,7 +3,7 @@
     <h1>User : {{active}}</h1>
 
     <hr>
-    <button @click="getAllUsers"> Get all users</button>
+    <button @click="getReviews"> Get my Reviews</button>
     <hr>
     <button @click="getAllUsers"> Delete a specific user</button>
     <hr>
@@ -25,39 +25,52 @@
     import { Api } from '@/Api'
 
     export default{
-        name: 'Master',
+        name: 'User Profile',
         data (){
             return{
-                title:'Master',
+                title:'User',
                 active: "Active",
-                status: this.$route.params.id
+                status: this.$route.params.id,
+                Reviews:[]
             }
         }
         ,created(){
-            var adminId = this.$route.params.id
+            var userId = this.$route.params.id
             this.id = this.$route.params.id
         }
         ,methods: {
+            getReviews(){
+                alert("I got clicked");
+                alert(this.id);
+
+                /*Api.get('/reviews').then(response=>{
+                    alert(response.data[0].rating);
+                    this.Reviews= response.data
+                    alert(this.Reviews);
+                }).catch(error=>{
+                    console.log(error)
+                })*/
+                var userID = this.$route.params.id;
+                this.$router.push(`/users/${userID}/reviews/`);
+
+            },
             getAllUsers(){
                 this.$router.push({name: 'usersList'});
             },
-            createProduct(adminId){
-                this.$router.push({name: 'createProduct'});
-            },
-            deleteAdmin(){
-                Api.delete('/admins/' + this.id)
+            deleteUser(){
+                Api.delete('/users/' + this.id)
                     .then(response => {
-                        console.log(response.data.message)
+                        console.log(response.data.message);
                         alert("Account has been deleted");
-                        this.$router.push({name: 'adminLogin'});
+                        this.$router.push({name: 'login'});
                     })
                     .catch(error => {
                         console.log(error)
                     })
             },
             getAllProducts(){
-                var adminId = this.$route.params.id
-                this.$router.push(`/admins/${adminId}/menus`)
+                 userId = this.$route.params.id;
+                this.$router.push(`/products`)
             }
         }
     }

@@ -24,7 +24,7 @@
         <input type="password" placeholder="Enter password" v-model="password" />
 
         <b-button type="submit" class="clicker" variant="danger">Log in</b-button>
-      
+
       </div>
 
       <div class="container" style="background-color:#f1f1f1">
@@ -57,8 +57,8 @@ export default {
         .then(response => {
           if (this.email === response.data.email) {
             alert(response.data._id);
-            var userId = response.data._id
-            this.$router.push({path: `/users/${userId}`});
+            let userId = response.data._id
+            this.$router.push({name: 'userPortal' , params:{id: userId}});
           }
         })
         .catch(error => {
@@ -68,7 +68,7 @@ export default {
                 this.error =true;
 
         });
-      
+
     }
   }
 };

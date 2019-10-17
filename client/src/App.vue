@@ -23,7 +23,7 @@
               <router-link class="white" to="/contact">Contact</router-link>
             </b-nav-item>
             <b-nav-item href="#">
-              <router-link class="white" to="/">Logout</router-link>
+              <router-link class="white" to="/login">Log out</router-link>
             </b-nav-item>
           </b-navbar-nav>
         </b-navbar-nav>
@@ -40,16 +40,6 @@
 
 <script>
 export default {
-  methods:{
-    signedIn(){
-      if (this.$route.params.id === '') {
-        this.$route.push('/login')
-        return false
-      } else {
-        return true
-      }
-    }
-  }
 }
 </script>
 

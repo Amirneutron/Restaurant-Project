@@ -66,7 +66,6 @@ export default {
                 var element = document.getElementById("p1");
                 element.classList.remove("cl");
                 this.error =true;
-
         });
 
     }

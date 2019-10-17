@@ -14,6 +14,7 @@ router.get('/', function (req, res, next) {
   });
 });
 
+
 //Get Reviews for a specific User
 router.get('/myReviews', function (req, res, next) {
   let userId = req.userId
@@ -26,7 +27,9 @@ router.get('/myReviews', function (req, res, next) {
   });
 });
 
-// Create a new Review for a specific restaurant
+
+
+// Create a new Review 
 router.post('/', function (req, res, next) {
   let userId = req.userId;
   var newReview = new Review({

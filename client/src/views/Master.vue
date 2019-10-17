@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h1>Admin : {{active}}</h1>
-
-    <hr>
+    <hr>  
     <button @click="getAllUsers"> Get all users</button>
     <hr>
     <button @click="getAllUsers"> Delete a specific user</button>
@@ -11,21 +9,23 @@
     <hr>
     <button @click="getAllProducts"> Get all products</button>
     <hr>
-    <button> Edit product</button>
+    <button @click="getAllProducts"> Edit product</button>
     <hr>
-    <button>Delete a product</button>
+    <button @click="getAllProducts">Delete a product</button>   
     <hr>
-    <button> Delete my account</button>
+    <button > Update my profile info</button>
+    <hr>
+    <button @click="deleteAdmin"> Delete admin my account</button>
     <hr>
     <button @click="logOut"> Log Out of my account</button>
     <hr>
-
+    <button @click="logOut"> Log Out of my account</button>
+    <hr>
   </div>
 </template>
 
 <script>
 import { Api } from '@/Api'
-
 export default{
     name: 'Master',
 		data (){
@@ -42,7 +42,7 @@ export default{
         this.logInCheck();
     }
     ,methods: {
-        logOut(){
+          logOut(){
             document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             this.$router.push("/");
         },
@@ -52,7 +52,6 @@ export default{
             this.$router.push('/adminLogin');
             }
         },
-
       getAllUsers(){
         this.$router.push({name: 'usersList'});
       },
@@ -79,8 +78,6 @@ export default{
 </script>
 
 <style scoped>
-
-
 button{
   position: relative;
   top: 20%;
@@ -90,5 +87,4 @@ button{
   padding:0.5rem 1.5rem;
   color: aliceblue
 }
-
 </style>

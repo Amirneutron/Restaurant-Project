@@ -108,6 +108,14 @@ router.get('/:id', function (req, res, next) {
   });
 });
 
+//Delete all users
+router.delete('/', function(req, res, next) {
+  User.remove({}, function(err,response) {
+      if (err) { return next(err); }
+      res.json(response);
+  });
+});
+
 //nested request
 router.use('/:id/products/orders', function (req, res, next) {
   req.userId = req.params.id;

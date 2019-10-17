@@ -13,8 +13,13 @@ import UsersList from './views/UsersList.vue'
 import CreateProduct from './views/CreateProduct.vue'
 import AdminRegister from './views/AdminRegister.vue'
 import ProductsList from './views/ProductsList.vue'
+
 import UserPortal from "./views/UserPortal.vue";
 import Review from './views/Review.vue'
+
+import EditProduct from './views/EditProduct.vue'
+
+
 
 
 Vue.use(Router)
@@ -100,6 +105,11 @@ export default new Router({
       path: '/users/:id/reviews/',
       name: 'showReviews',
       component: Review
+    },
+      path: '/products/:id/edit',
+      name: 'editproduct',
+      component: EditProduct
+   
     }
 
   ]

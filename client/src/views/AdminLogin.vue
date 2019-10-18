@@ -22,8 +22,10 @@
           <b>Password</b>
         </label>
         <input type="password" placeholder="Enter password" v-model="password" />
-
-        <b-button type="submit" class="clicker" variant="danger">Log in as an admin</b-button>
+        <button type="submit" class="clicker" >
+        <span class="spinner-grow spinner-grow-sm"></span>
+          Log in as an admin
+        </button> 
       </div>
           <b-button href="/registerAdmin">Create New Account</b-button>
     </form>
@@ -43,10 +45,6 @@ export default {
 
     };
   },
-  /*mounted(){
-    this.adminSubmit();
-
-  }*/
   methods: {
     adminSubmit(){
       Api.post("/admins/login", {

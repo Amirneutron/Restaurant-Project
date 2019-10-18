@@ -22,7 +22,6 @@ export default {
     mounted(){
         this.getAllUsers();
         this.logInCheck();
-
     },
     methods: {
       getAllUsers(){
@@ -48,7 +47,6 @@ export default {
         })
 
     },logInCheck(){
-
             if(document.cookie === ""){
                 this.$router.push('/adminLogin');
             }
@@ -65,7 +63,6 @@ export default {
         })
 
       }
-    }
     },
     components:{
       UserItem

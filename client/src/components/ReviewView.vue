@@ -1,18 +1,19 @@
 <template>
 
-  <div id="Review">
-    <div class="list-group">
-      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+  <div id="review">
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
-          <p>{{review.comment}} <br>{{review.rating}} <br>{{review.reviewer.fName}}</p>
-
-
+          <h5 class="mb-1">{{review.reviewer.fName}}</h5>
+          <small>Rating : {{review.rating}} </small>
         </div>
-        <button type="button" class="close" @click="$emit('delete-review', review._id)">Delete</button>
-        <button type="button" class="close" @click="$emit('edit-review', review._id)">Edit</button>
-
-      </a>
-    </div>
+        <p class="mb-1"> Comment : {{review.comment}}</p>
+        <!-- Date/Time -->
+        <p>Posted on {{review.date}}</p>
+        <button type="button" class="close" @click="$emit('delete-review', review._id)">DELETE REVIEW</button>
+        <button type="button" class="close" @click="$emit('edit-review', review._id)">EDIT REVIEW</button>
+        </a>
+      </div>
   </div>
 </template>
 <script>
@@ -29,7 +30,7 @@
   .close:hover{
     background-color: #dc3545;
   }
-  #product{
+  #review{
     margin-top: 3rem;
 
   }

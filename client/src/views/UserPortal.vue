@@ -1,21 +1,20 @@
 <template>
   <div>
     <h1>User : {{active}}</h1>
-
     <hr>
     <button @click="getReviews"> Get my Reviews</button>
     <hr>
-    <button @click="getAllUsers"> Delete a specific user</button>
+    <button @click="createReview"> Create a new review</button>
     <hr>
-    <button @click="createProduct"> Create a new product</button>
+    <button @click="getReviews"> Delete my review(s)</button>
     <hr>
     <button @click="getAllProducts"> Get all products</button>
     <hr>
-    <button> Edit product</button>
+    <button @click="getReviews"> Edit my posted review</button>
     <hr>
-    <button>Delete a product</button>
+    <button @click="getReviews">Delete my review(s)</button>
     <hr>
-    <button> Delete my account</button>
+    <button @click="deleteUser"> Delete my account</button>
     <hr>
 
   </div>
@@ -25,7 +24,7 @@
     import { Api } from '@/Api'
 
     export default{
-        name: 'User Profile',
+        name: 'User-Profile',
         data (){
             return{
                 title:'User',
@@ -40,19 +39,8 @@
         }
         ,methods: {
             getReviews(){
-                alert("I got clicked");
-                alert(this.id);
-
-                /*Api.get('/reviews').then(response=>{
-                    alert(response.data[0].rating);
-                    this.Reviews= response.data
-                    alert(this.Reviews);
-                }).catch(error=>{
-                    console.log(error)
-                })*/
                 var userID = this.$route.params.id;
                 this.$router.push(`/users/${userID}/reviews/`);
-
             },
             getAllUsers(){
                 this.$router.push({name: 'usersList'});
@@ -69,11 +57,13 @@
                     })
             },
             getAllProducts(){
-                 userId = this.$route.params.id;
-                this.$router.push(`/products`)
-            }
-        }
-    }
+                 this.$router.push(`/products`)
+            },
+             createReview(userID){
+             this.$router.push({name: 'createReview'});
+       }
+     }
+ }
 </script>
 
 <style scoped>

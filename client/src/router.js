@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Camels from './views/Camels.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import Contact from './views/Contact.vue'
@@ -13,10 +12,9 @@ import UsersList from './views/UsersList.vue'
 import CreateProduct from './views/CreateProduct.vue'
 import AdminRegister from './views/AdminRegister.vue'
 import ProductsList from './views/ProductsList.vue'
-
 import UserPortal from "./views/UserPortal.vue";
 import Review from './views/Review.vue'
-
+import EditReview from './views/EditReview.vue'
 import EditProduct from './views/EditProduct.vue'
 
 
@@ -31,11 +29,6 @@ export default new Router({
     { path: '/',
       name:'home',
       component: Home
-    },
-    {
-      path: '/camels',
-      name: 'camels',
-      component: Camels
     },
     {
       path: '/login',
@@ -106,13 +99,18 @@ export default new Router({
       name: 'showReviews',
       component: Review
     },
+    {
       path: '/products/:id/edit',
-      name: 'editproduct',
+      name: 'editProduct',
       component: EditProduct
-   
+    },
+    {
+      path: '/reviews/:id/edit',
+      name: 'editReview',
+      component: EditReview
     }
-
   ]
+
 });
 function checkAuth(to, from, next) {
 

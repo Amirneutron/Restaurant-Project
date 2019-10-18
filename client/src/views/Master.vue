@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Admin : {{active}}</h1>
     <hr>  
     <button @click="getAllUsers"> Get all users</button>
     <hr>
@@ -19,8 +20,6 @@
     <hr>
     <button @click="logOut"> Log Out of my account</button>
     <hr>
-    <button @click="logOut"> Log Out of my account</button>
-    <hr>
   </div>
 </template>
 
@@ -36,22 +35,21 @@ export default{
       }
     }
     ,created(){
-      var adminId = this.$route.params.id
-      this.id = this.$route.params.id
+        var adminId = this.$route.params.id
+        this.id = this.$route.params.id
     },mounted(){
         this.logInCheck();
     }
     ,methods: {
-          logOut(){
-            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            this.$router.push("/");
+      logOut(){
+        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        this.$router.push("/");
         },
-        logInCheck(){
-
-            if(document.cookie === ""){
-            this.$router.push('/adminLogin');
-            }
-        },
+      logInCheck(){
+        if(document.cookie === ""){
+        this.$router.push('/adminLogin');
+     }
+      },
       getAllUsers(){
         this.$router.push({name: 'usersList'});
       },

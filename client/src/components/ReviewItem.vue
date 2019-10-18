@@ -6,15 +6,6 @@
     <p id="rating">Rating: <span v-for="review in review.rating" :key="review._id">⭐</span></p>
     <h6>-{{review.reviewer.fName}} {{review.reviewer.lName}}</h6>
   </blockquote>
-
-
-
-
-
-
-
-
-
   </div>
 </template>
 

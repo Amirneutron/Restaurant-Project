@@ -1,13 +1,6 @@
 <template>
   <div class="login">
     <b-alert class="cl" id="p1" show variant="danger"></b-alert>
-
-    <!--<form class="login-form"  @submit.prevent="loginSubmit">
-        <input type="email" placeholder="Email address" v-model="email">
-        <input type="password" placeholder="Password" v-model="password">
-        <b-button type="submit" class="clicker" variant="danger">Log in</b-button>
-    </form>-->
-
     <form class="login-form" @submit.prevent="loginSubmit">
       <div class="imgcontainer">
       </div>
@@ -21,10 +14,11 @@
         <label for="password">
           <b>Password</b>
         </label>
-        <input type="password" placeholder="Enter password" v-model="password" />
-
-        <b-button type="submit" class="clicker" variant="danger">Log in</b-button>
-
+        <input type="password" placeholder="Enter password" v-model="password" /> 
+        <button type="submit" class="clicker" >
+        <span class="spinner-grow spinner-grow-sm"></span>
+          Log in
+        </button>         
       </div>
 
       <div class="container" style="background-color:#f1f1f1">
@@ -58,10 +52,11 @@ export default {
           if (this.email === response.data.email) {
             alert(response.data._id);
             let userId = response.data._id
-            this.$router.push({name: 'userPortal' , params:{id: userId}});
+            this.$router.push(`/users/${userId}`);
           }
         })
         .catch(error => {
+          console.log(error)
          document.getElementById("p1").innerHTML = "Invaid username or password !";
                 var element = document.getElementById("p1");
                 element.classList.remove("cl");

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Edit <span>{{ product.name }}</span></h1>
+    <h1>Edit : <span>{{ product.name }}</span></h1>
     <form @submit.prevent="submitProduct">
       <label for="name"><b>Change product name</b></label>
       <input v-model="newProduct.name" class="input" type="text" :placeholder="product.name">
@@ -46,8 +46,8 @@ export default {
   methods: {
     getProduct() {
       Api.get('/products/' + this.productId)
-        .then(reponse => {
-          this.product = reponse.data
+        .then(response => {
+          this.product = response.data
         })
         .catch(error => {
           this.product = null

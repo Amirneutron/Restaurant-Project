@@ -1,18 +1,16 @@
 <template>
   <div>
+    <h2>My reviews :  {{reviews.length}}</h2>
+      
     <b-list-group >
       <b-list-group-item ><review-view v-for="review  in reviews" :key="review._id" :review="review" @delete-review="deleteReview" @edit-review="editReview"></review-view></b-list-group-item>
     </b-list-group>
-
-
-
   </div>
 
 </template>
 
 <script>
     import { Api } from '@/Api'
-    import ReviewItem from "../components/ReviewItem";
     import ReviewView from "../components/ReviewView"
 
     export default {
@@ -38,7 +36,6 @@
                 })
             },
             deleteReview(id){
-
                 Api.delete('/users/'+ this.userId + '/reviews/' + id)
                     .then(response => {
                         console.log(response.data)
@@ -50,15 +47,12 @@
                     })
             },
             editReview(id){
-                this.$router.push({name: 'editproduct', params:{id: id}});
-            },
-            viewReview(id){
-                this.$router.push('/products/' + id)
+                this.$router.push({name: 'editReview', params:{id:id}});
             }
 
         },
         components: {
-            ReviewItem,ReviewView
+            ReviewView
         }
     }
 </script>

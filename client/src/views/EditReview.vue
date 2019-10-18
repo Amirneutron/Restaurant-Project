@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <h1>Edit <span> Review </span></h1>
-    <form @submit.prevent="submitProduct">
+    <h1>Edit : <span> Review </span></h1>
+    <form @submit.prevent="submitReview">
       <label for="name"><b>Change Comment</b></label>
       <input v-model="newReview.comment" class="input" type="text" :placeholder="review.comment">
       <label for="name"><b>Change Rating</b></label>
-      <input v-model="newReview.rating" class="input" type="number" :placeholder="review.price">
+      <input v-model="newReview.rating" class="input" type="number" :placeholder="review.rating">
       <hr>
       <b-button class="editButton" type="submit" >Update Review </b-button>
     </form>
@@ -15,7 +15,7 @@
 <script>
     import { Api } from '@/Api'
     export default {
-        name: 'EditProduct',
+        name: 'EditReview',
         data() {
             return {
                 review: {},
@@ -25,14 +25,12 @@
         created() {
             this.reviewId = this.$route.params.id
         },
-        mounted() {
-            this.getReview()
-        },
+      
         methods: {
             getReview() {
-                Api.get('/reviews/' + this.productId)
-                    .then(reponse => {
-                        this.review = reponse.data
+                Api.get('/reviews/' + this.reviewId)
+                    .then(response => {
+                        this.review = response.data
                     })
                     .catch(error => {
                         this.review = null;
@@ -42,12 +40,12 @@
                         // This code is always executed (after success or error).
                     })
             },
-            submitProduct() {
+            submitReview() {
                 Api.patch('/reviews/' + this.reviewId, this.newReview)
                     .then(response => {
                         console.log(response.data)
-                        alert("The product has been updated successfully")
-                        this.$router.push('/reviews/')
+                        alert("Your old review has been updated successfully")
+                        this.$router.push(`/users/${userId}`)
                     })
                     .catch(error => {
                         console.log(error)

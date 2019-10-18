@@ -25,6 +25,12 @@
             <b-nav-item href="#">
               <router-link class="white" to="/login">Log out</router-link>
             </b-nav-item>
+
+          
+          
+
+
+
           </b-navbar-nav>
         </b-navbar-nav>
       </b-collapse>

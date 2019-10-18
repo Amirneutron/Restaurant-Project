@@ -1,12 +1,10 @@
 <template>
     <div>
-        <h2>List Of All Products {{products.length}}</h2>
+        <h2>List Of All Products : {{products.length}}</h2>
         <button type="button" class="btn btn-danger" @click="deleteAllProduct">Delete All Products</button>
+        <hr>
         <b-list-group >
-        <b-list-group-item ><product-view v-for="product in products" :key="product._id" 
-        :product="product" @delete-product="deleteProduct" 
-        @edit-product="editProduct" @view-product="viewProduct"></product-view>       
-        </b-list-group-item>
+        <b-list-group-item ><product-view v-for="product in products" :key="product._id" :product="product" @delete-product="deleteProduct" @edit-product="editProduct" @view-product="viewProduct"></product-view></b-list-group-item>
         </b-list-group>
     </div>   
 </template>
@@ -51,12 +49,12 @@ export default {
         })
       },
       editProduct(id){
-          this.$router.push({name: 'editproduct', params:{id: id}});
+          this.$router.push({name: 'editProduct', params:{id: id}});
       },
       viewProduct(id){
           this.$router.push('/products/' + id)
       },
-      deleteAllProducts(){
+      deleteAllProduct(){
           Api.delete('/admins/' + this.adminId + '/products')
         .then(response => {
           alert("Are you sure you want to delete all products ?")

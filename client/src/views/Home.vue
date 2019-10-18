@@ -51,7 +51,7 @@ export default {
   },
   mounted() {
     this.getMessage()
-    this.getReviews()
+    //this.getReviews()
   },
   methods: {
       registerNew(){
@@ -72,6 +72,7 @@ export default {
     getMessage() {
       Api.get(`/`)
         .then(response => {
+          alert("Unmount the review, so it can display automatically because if a user is deleted it wont show the fName and last name")
           this.message = response.data.message
         })
         .catch(error => {

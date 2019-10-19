@@ -5,7 +5,7 @@
       <h1>{{message}} <br><span>Trust me</span> </h1>
       <b-button @click="registerNew" id="sign-up" variant="danger">Register</b-button>
       <b-button @click="logIn" variant="outline-dark">Log in</b-button>
-      <hr>   
+      <hr>
 
      <!-- <button><a href="/register" role="button" aria-pressed="true">SIGN UP</a></button>-->
     </div>
@@ -51,7 +51,7 @@ export default {
   },
   mounted() {
     this.getMessage()
-    //this.getReviews()
+    this.getReviews()
   },
   methods: {
       registerNew(){
@@ -72,7 +72,6 @@ export default {
     getMessage() {
       Api.get(`/`)
         .then(response => {
-          alert("Unmount the review, so it can display automatically because if a user is deleted it wont show the fName and last name")
           this.message = response.data.message
         })
         .catch(error => {

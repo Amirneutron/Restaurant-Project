@@ -1,8 +1,11 @@
+
+
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var md5 = require('md5');
 var ordersController = require('./orders');
+var Review =require('../models/review');
 
 var productsController = require('./products');
 var reviewsController = require('./reviews');
@@ -92,6 +95,14 @@ router.delete('/:id', function (req, res, next) {
     if (users === null) {
       return res.status(404).json({ 'message': 'Unsuccessful operation' });
     }
+    Review.deleteMany({reviewer:id},function(err,review){
+      if (err) { return next(err); }
+      if (review === null) {
+        return res.status(200).json({ 'Message': 'The user had no reviews' });
+      }
+
+    });
+
     res.json(users);
   });
 });

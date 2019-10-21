@@ -41,6 +41,26 @@ router.get('/:id', function (req, res, next) {
   });
 });
 
+// Update a product 
+router.put('/:id', function (req, res, next) {
+  var id = req.params.id;
+  Product.findById(id, function (err, product) {
+    if (err) {
+      return next(err);
+    }
+    if (product == null) {
+      return res.status(404).json({ 'message': 'Product not found' });
+    }
+    product.name = req.body.name;
+    product.price = req.body.price;
+    product.image = req.body.image;
+    product.content = req.body.content;
+    product.save();
+    res.json(product);
+  }
+  );
+});
+
 // Update product info
 router.patch('/:id', function (req, res, next) {
   var id = req.params.id;

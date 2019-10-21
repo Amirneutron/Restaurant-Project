@@ -16,6 +16,8 @@
     <hr>
     <button @click="deleteUser"> Delete my account</button>
     <hr>
+    <button @click="logOut"> Log Out of my account</button>
+    <hr>
 
   </div>
 </template>
@@ -34,21 +36,23 @@
             }
         }
         ,created(){
-            var userId = this.$route.params.id
-            this.id = this.$route.params.id
+            this.userId = this.$route.params.userId
         }
         ,methods: {
+            logOut(){
+                document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                this.$router.push("/");
+                },
             getReviews(){
-                var userID = this.$route.params.id;
-                this.$router.push(`/users/${userID}/reviews/`);
+                var userId = this.$route.params.userId;
+                this.$router.push(`/users/${userId}/reviews/myReviews`);
             },
             getAllUsers(){
                 this.$router.push({name: 'usersList'});
             },
             deleteUser(){
-                Api.delete('/users/' + this.id)
+                Api.delete('/users/' + this.userId)
                     .then(response => {
-                        console.log(response.data.message);
                         alert("Account has been deleted");
                         this.$router.push({name: 'login'});
                     })
@@ -59,8 +63,9 @@
             getAllProducts(){
                  this.$router.push(`/products`)
             },
-             createReview(userID){
-             this.$router.push({name: 'createReview'});
+             createReview(){
+                var userId = this.$route.params.userId;
+                this.$router.push(`/users/${userId}/reviews`);
        }
      }
  }

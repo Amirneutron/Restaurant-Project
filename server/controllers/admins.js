@@ -15,7 +15,7 @@ router.post('/register', function (req, res, next) {
     password: md5(req.body.password)
   });
   newAdmin.save(function (err) {
-    if (err) { res.status(404).json({ 'message': 'Email already exists ' }); }
+    if (err) { return next(err); }
     res.status(201).json(newAdmin);
   });
 });
@@ -63,10 +63,18 @@ router.get('/users', function (req, res, next) {
   });
 });
 
+// Return a list of all admins
+router.get('/', function (req, res, next) {
+  Admin.find(function (err, admin) {
+    if (err) { return next(err); }
+    res.json({ 'admins': admin });
+  });
+});
+
 // Delete the user with the given ID
 router.delete('/users/:id', function (req, res, next) {
   var id = req.params.id;
-  User.findOneAndDelete({ _id: id }, function (err, users) {
+  User.deleteOne({ _id: id }, function (err, users) {
     if (err) { return next(err); }
     if (users === null) {
       return res.status(404).json({ 'message': 'Unsuccessful operation' });
@@ -90,6 +98,14 @@ router.patch('/:id', function (req, res, next) {
     res.json(admin);
   }
   );
+});
+
+//Delete all admins
+router.delete('/', function(req, res, next) {
+  Admin.remove({}, function(err,response) {
+      if (err) { return next(err); }
+      res.json(response);
+  });
 });
 
 router.use('/:id/products', function (req, res, next) {

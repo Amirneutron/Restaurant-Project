@@ -6,11 +6,11 @@
             <label for="price"><b>Product price</b></label>
             <input type="number" placeholder=" Enter product price in SEK" v-model="price" required>
             <label for="image"><b>Select product image</b></label>
-            <input type="text" placeholder=" Enter product image" v-model="image" required>
-            <!--<select type="file" name="image" v-model="image">
+            <!--<input type="text" placeholder=" Enter product image" v-model="image" required>-->
+            <select type="file" name="image" v-model="image">
                 <option>spicy.jpg</option>
                 <option>kebabPizza.jpg</option>
-                <option>gardenClassic.jpg</option>
+                <option>gardenClassicPizza.jpg</option>
                 <option>hawaii.jpg</option>
                 <option>margaritaPizza.jpg</option>
                 <option>pepperoniPizza.jpg</option>
@@ -57,9 +57,9 @@ export default {
                     image: this.image,
                     content: this.content
                 }).then(response=>{
-                    // this.products.push(response.data)
+                    
                     alert("Product has been created");
-                    this.$router.push({name: 'master'});
+                    this.$router.push(`/admins/${this.adminId}`);
                 }).catch(error=>{
                     this.products = []
                     console.log(error);
@@ -74,7 +74,6 @@ export default {
     }
 }
 </script>
-
 <style scoped>
 
 /* Add padding to containers */
@@ -110,9 +109,5 @@ hr {
   width: 100%;
   opacity: 0.9;
 }
-.registerbtn:hover {
-  opacity:1;
-}
-
 
 </style>

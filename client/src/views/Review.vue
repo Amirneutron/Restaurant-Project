@@ -1,7 +1,8 @@
 <template>
   <div>
     <h2>My reviews :  {{reviews.length}}</h2>
-      
+    <button type="button" class="btn btn-danger" @click="deleteAllReviews">Delete All Reviews</button>
+        <hr>   
     <b-list-group >
       <b-list-group-item ><review-view v-for="review  in reviews" :key="review._id" :review="review" @delete-review="deleteReview" @edit-review="editReview"></review-view></b-list-group-item>
     </b-list-group>
@@ -21,7 +22,7 @@
             }
         } ,
         created(){
-            this.userId = this.$route.params.id
+            this.userId = this.$route.params.userId
         },
         mounted() {
             this.getReviews();
@@ -29,7 +30,6 @@
         methods: {
             getReviews() {
                 Api.get('/users/' + this.userId + '/reviews/myReviews').then(response=>{
-                    //alert(response.data[0].reviews.rating);
                     this.reviews= response.data;
                 }).catch(error=>{
                     console.log(error);
@@ -47,9 +47,18 @@
                     })
             },
             editReview(id){
-                this.$router.push({name: 'editReview', params:{id:id}});
-            }
-
+                this.$router.push(`/users/${this.userId}/reviews/${id}`);
+            },
+            deleteAllReviews(){
+              Api.delete('/users/' + this.userId + '/reviews')
+            .then(response => {
+              alert("Are you sure you want to delete all reviews ?")
+              this.reviews = []
+            })
+            .catch(error => {
+              console.log(error)
+            })
+      }
         },
         components: {
             ReviewView

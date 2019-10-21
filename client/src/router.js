@@ -12,11 +12,11 @@ import UsersList from './views/UsersList.vue'
 import CreateProduct from './views/CreateProduct.vue'
 import AdminRegister from './views/AdminRegister.vue'
 import ProductsList from './views/ProductsList.vue'
-import UserPortal from "./views/UserPortal.vue";
+import UserPortal from "./views/UserPortal.vue"
 import Review from './views/Review.vue'
 import EditReview from './views/EditReview.vue'
 import EditProduct from './views/EditProduct.vue'
-
+import MakeReview from './views/MakeReview.vue'
 
 
 
@@ -90,12 +90,12 @@ export default new Router({
       component: ProductsList
     },
     {
-    path:'/users/:id',
+    path:'/users/:userId',
       name: 'userPortal',
       component: UserPortal
     },
     {
-      path: '/users/:id/reviews/',
+      path: '/users/:userId/reviews/myReviews',
       name: 'showReviews',
       component: Review
     },
@@ -105,9 +105,14 @@ export default new Router({
       component: EditProduct
     },
     {
-      path: '/reviews/:id/edit',
+      path: '/users/:userId/reviews/:id',
       name: 'editReview',
       component: EditReview
+    },
+    {
+      path: '/users/:userId/reviews',
+      name: 'createReview',
+      component: MakeReview
     }
   ]
 

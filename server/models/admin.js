@@ -6,4 +6,4 @@ var adminSchema = new Schema({
   password: { type: String, required: true }
 });
 
-module.exports = mongoose.model('Admins', adminSchema);
+module.exports = mongoose.model('admins', adminSchema);

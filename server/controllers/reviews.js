@@ -27,6 +27,14 @@ router.get('/myReviews', function (req, res, next) {
   });
 });
 
+//Delete all reviews
+router.delete('/', function(req, res, next) {
+  Review.remove({}, function(err,response) {
+      if (err) { return next(err); }
+      res.json(response);
+  });
+});
+
 // Create a new Review 
 router.post('/', function (req, res, next) {
   let userId = req.userId;
@@ -62,9 +70,41 @@ router.delete('/:id', function (req, res, next) {
   });
 });
 
+//Put a review
+router.put('/:id', function (req, res, next) {
+  let userId = req.userId;
+  var id = req.params.id;
+  User.findById(userId, function (err, user) {
+    if (err) return next(err);
+    if (user === null) {
+      return res.status(404).json({ 'message': ' User not found' });
+    }
+    Review.findById(id, function (err, review) {
+      if (err) {
+        return next(err);
+      }
+      if (review == null) {
+        return res.status(404).json({ 'message': 'Review not found' });
+      }
+      review.rating = req.body.rating;
+      review.comment = req.body.comment;
+      review.save();
+      res.json(review);
+    });
+});
+});
+
+
+
 //Edit a review
 router.patch('/:id', function (req, res, next) {
+  let userId = req.userId;
   var id = req.params.id;
+  User.findById(userId, function (err, user) {
+    if (err) return next(err);
+    if (user === null) {
+      return res.status(404).json({ 'message': ' User not found' });
+    }
   Review.update({ _id: id }, { $set: req.body }, function (err, review) {
     if (err) { return next(err); }
     if (review == null) {
@@ -72,7 +112,7 @@ router.patch('/:id', function (req, res, next) {
     }
     res.json(review);
   });
-
+});
 });
 
 module.exports = router;

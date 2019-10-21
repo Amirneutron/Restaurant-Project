@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Edit : <span>{{ product.name }}</span></h1>
-    <form @submit.prevent="submitProduct">
+    <form @submit.prevent="editProduct">
       <label for="name"><b>Change product name</b></label>
       <input v-model="newProduct.name" class="input" type="text" :placeholder="product.name">
       <label for="name"><b>Change product price</b></label>
@@ -57,7 +57,23 @@ export default {
           // This code is always executed (after success or error).
         })
     },
-    submitProduct() {
+    editProduct() {
+      if (
+        this.newProduct.name &&
+        this.newProduct.price &&
+        this.newProduct.image &&
+        this.newProduct.content
+      ){
+        Api.put('/products/' + this.productId, this.newProduct)
+          .then(response => {
+            console.log(response.data)
+            alert("The product has been updated successfully")
+            this.$router.push('/products/' + this.productId)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      }else{
         Api.patch('/products/' + this.productId, this.newProduct)
           .then(response => {
             console.log(response.data)
@@ -67,7 +83,8 @@ export default {
           .catch(error => {
             console.log(error)
           })
-    
+
+      }   
     }
   }
 }

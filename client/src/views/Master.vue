@@ -2,7 +2,7 @@
   <div>
     <h1>Admin : {{active}}</h1>
     <hr>  
-    <button @click="getAllUsers"> Get all users</button>
+    <button @click="getAllUsers"> Get all users & Admins</button>
     <hr>
     <button @click="getAllUsers"> Delete a specific user</button>
     <hr>

@@ -74,10 +74,10 @@ router.patch('/:id', function (req, res, next) {
 });
 
 //Delete all products
-router.delete('/', function(req, res, next) {
-  Product.remove({}, function(err,response) {
-      if (err) { return next(err); }
-      res.json(response);
+router.delete('/', function (req, res, next) {
+  Product.remove({}, function (err, product) {
+    if (err) { return next(err); }
+    res.json(product);
   });
 });
 

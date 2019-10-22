@@ -59,13 +59,20 @@ router.post('/login', function (req, res) {
 });
 
 //update user info with a given id
-router.patch('/:id', function (req, res, next) {
+router.put('/:id', function (req, res, next) {
   var id = req.params.id;
-  User.update({ _id: id }, { $set: req.body }, function (err, user) {
-    if (err) { return next(err); }
+  User.findById(id, function (err, user) {
+    if (err) {
+      return next(err);
+    }
     if (user == null) {
       return res.status(404).json({ 'message': 'User not found' });
     }
+    user.fName = req.body.fName;
+    user.lName = req.body.lName;
+    user.email = req.body.email;
+    user.mobileNumber = req.body.mobileNumber;
+    user.save();
     res.json(user);
   });
 });

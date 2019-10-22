@@ -14,8 +14,6 @@
     <hr>
     <button @click="getAllProducts">Delete a product</button>   
     <hr>
-    <button > Update my profile info</button>
-    <hr>
     <button @click="deleteAdmin"> Delete admin my account</button>
     <hr>
     <button @click="logOut"> Log Out of my account</button>

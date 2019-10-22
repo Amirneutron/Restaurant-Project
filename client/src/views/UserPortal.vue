@@ -14,6 +14,8 @@
     <hr>
     <button @click="getReviews">Delete my review(s)</button>
     <hr>
+    <button @click="updateProfile"> Update my profile info</button>
+    <hr>
     <button @click="deleteUser"> Delete my account</button>
     <hr>
     <button @click="logOut"> Log Out of my account</button>
@@ -66,7 +68,11 @@
              createReview(){
                 var userId = this.$route.params.userId;
                 this.$router.push(`/users/${userId}/reviews`);
-       }
+       },
+            updateProfile(){
+                var userId = this.$route.params.userId
+                this.$router.push(`/users/${userId}/profile`)
+            }
      }
  }
 </script>

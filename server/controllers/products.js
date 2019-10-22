@@ -69,7 +69,15 @@ router.patch('/:id', function (req, res, next) {
     if (product == null) {
       return res.status(404).json({ 'message': 'Product not found' });
     }
-    res.json(product);
+    Product.findById(id, function (err, product) {
+      if (err) { return next(err); }
+      if (product === null) {
+        return res.status(404).json({ 'message': 'No Product found' });
+      }
+      res.json(product);
+    });
+
+    
   });
 });
 

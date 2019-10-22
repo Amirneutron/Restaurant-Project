@@ -17,6 +17,7 @@ import Review from './views/Review.vue'
 import EditReview from './views/EditReview.vue'
 import EditProduct from './views/EditProduct.vue'
 import MakeReview from './views/MakeReview.vue'
+import EditProfile from './views/EditProfile.vue'
 
 
 
@@ -113,6 +114,11 @@ export default new Router({
       path: '/users/:userId/reviews',
       name: 'createReview',
       component: MakeReview
+    },
+    {
+      path: '/users/:userId/profile',
+      name: 'editProfile',
+      component: EditProfile
     }
   ]
 
